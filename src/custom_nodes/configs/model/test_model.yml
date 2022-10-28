@@ -1,0 +1,7 @@
+input: ["img"]
+output: ["bboxes", "bbox_labels", "bbox_scores"]
+
+config_file: "./yolov3_mobilenetv2_320_300e_coco.py"                                  # config file
+checkpoint_file: "./yolov3_mobilenetv2_320_300e_coco_20210719_215349-d18dff72.pth"    # checkpoint file
+device: "cpu"                                                                         # device used for inference (default = 'cuda:0')
+score_thre: 0.3                                                                       # conf score threshold

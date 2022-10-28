@@ -1,0 +1,14 @@
+nodes:
+- input.visual:
+    source: "./demo/demo.mp4"
+- custom_nodes.model.test_model:
+    config_file: "./yolov3_mobilenetv2_320_300e_coco.py"                                  # config file
+    checkpoint_file: "./yolov3_mobilenetv2_320_300e_coco_20210719_215349-d18dff72.pth"    # checkpoint file
+    device: "cuda"                                                                        # device used for inference ('cuda' for gpu)
+    score_thre: 0.3                                                                       # conf score threshold
+- draw.bbox:
+    show_labels: True
+- custom_nodes.draw.score
+- output.screen
+- output.media_writer:
+    output_dir: "./pkd_outputs"
