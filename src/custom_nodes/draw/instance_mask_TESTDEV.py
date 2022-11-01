@@ -128,9 +128,10 @@ class Node(AbstractNode, ThresholdCheckerMixin):
             outputs (dict): Output in dictionary format with key "img".
         """
         
-      #   masks = inputs["masks"]
-      #   print(len(masks[0][np.where(masks[0] != 0)]))
-      #   print(len(masks[1][np.where(masks[1] != 0)]))
+        masks = inputs["masks"]
+        print(masks)
+        print(masks.dtype)
+        print(type(masks))
         
         if self.effect is None:
             output_img = self._draw_standard_masks(

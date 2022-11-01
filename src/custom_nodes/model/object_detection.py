@@ -30,13 +30,9 @@ class Node(AbstractNode):
                     xyxy = v[0:4]
                     score = v[4]
                     if score >= self.score_thre:
-                        class_ids.append(str(id))
+                        class_ids.append(id)
                         bboxes.append(xyxy)
                         scores.append(score)
-        if len(class_ids) == 0:
-            class_ids = np.empty(0)
-            bboxes = np.empty((0, 4))
-            scores = np.empty(0)
         for bbox in bboxes:
             bbox[[0,2]] = bbox[[0,2]] / width
             bbox[[1,3]] = bbox[[1,3]] / height
@@ -47,5 +43,8 @@ class Node(AbstractNode):
         height, width = img.shape[:2]
         result = inference_detector(self.model, img)
         bboxes, class_ids, scores = self.post_process(result, height, width)
+        bboxes = np.array(bboxes, dtype="float32")
+        class_ids = np.array(class_ids, dtype="str")
+        scores = np.array(scores, dtype="float32")
         outputs = {"bboxes": bboxes, "bbox_labels": class_ids, "bbox_scores": scores}  ## class_ids supposed to change to class_labels defined by dictionary mapping
         return outputs

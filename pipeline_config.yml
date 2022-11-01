@@ -1,18 +1,20 @@
 nodes:
 - input.visual:
     source: "./demo/demo.mp4"
-# - model.mask_rcnn:
-#     detect: ["*"]
-- custom_nodes.model.instance_segmentation:
-    config_file: "./mask_rcnn_r50_fpn_fp16_1x_coco.py"                                  # config file
-    checkpoint_file: "./mask_rcnn_r50_fpn_fp16_1x_coco_20200205-59faf7e4.pth"           # checkpoint file
+# - custom_nodes.model.instance_segmentation:
+#     config_file: "./mask_rcnn_r50_fpn_fp16_1x_coco.py"                                  # config file
+#     checkpoint_file: "./mask_rcnn_r50_fpn_fp16_1x_coco_20200205-59faf7e4.pth"           # checkpoint file
+#     device: "cuda"                                                                      # device used for inference ('cuda' for gpu)
+#     score_thre: 0.3                                                                     # conf score threshold
+- custom_nodes.model.object_detection:
+    config_file: "./yolox_s_8x8_300e_coco.py"                                           # config file
+    checkpoint_file: "./yolox_s_8x8_300e_coco_20211121_095711-4592a793.pth"             # checkpoint file
     device: "cuda"                                                                      # device used for inference ('cuda' for gpu)
     score_thre: 0.3                                                                     # conf score threshold
 - draw.bbox:
     show_labels: True
-- custom_nodes.draw.instance_mask_TESTDEV
 # - draw.instance_mask
-# - custom_nodes.draw.score
+- custom_nodes.draw.score
 - output.screen
 - output.media_writer:
     output_dir: "./pkd_outputs"
