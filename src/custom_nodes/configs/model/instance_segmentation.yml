@@ -1,0 +1,7 @@
+input: ["img"]
+output: ["bboxes", "bbox_labels", "bbox_scores", "masks"]
+
+config_file: "./mask_rcnn_r50_fpn_fp16_1x_coco.py"                               # config file
+checkpoint_file: "./mask_rcnn_r50_fpn_fp16_1x_coco_20200205-59faf7e4.pth"        # checkpoint file
+device: "cuda"                                                                   # device used for inference (default = 'cuda:0')
+score_thre: 0.3                                                                  # conf score threshold
