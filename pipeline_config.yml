@@ -1,16 +1,16 @@
 nodes:
 - input.visual:
-    source: "./demo/demo.mp4"
+    source: "./demo/demo.jpg"
 # - custom_nodes.model.instance_segmentation:
-#     config_file: "./mask_rcnn_r50_fpn_fp16_1x_coco.py"                                  # config file
-#     checkpoint_file: "./mask_rcnn_r50_fpn_fp16_1x_coco_20200205-59faf7e4.pth"           # checkpoint file
-#     device: "cuda"                                                                      # device used for inference ('cuda' for gpu)
-#     score_thre: 0.3                                                                     # conf score threshold
+#     config_file: "./mask_rcnn_r50_fpn_fp16_1x_coco.py"
+#     checkpoint_file: "./mask_rcnn_r50_fpn_fp16_1x_coco_20200205-59faf7e4.pth"
+#     device: "cuda"
+#     score_thre: 0.3
 - custom_nodes.model.object_detection:
-    config_file: "./yolox_s_8x8_300e_coco.py"                                           # config file
-    checkpoint_file: "./yolox_s_8x8_300e_coco_20211121_095711-4592a793.pth"             # checkpoint file
-    device: "cuda"                                                                      # device used for inference ('cuda' for gpu)
-    score_thre: 0.3                                                                     # conf score threshold
+    config_file: "./yolox_s_8x8_300e_coco.py"
+    checkpoint_file: "./yolox_s_8x8_300e_coco_20211121_095711-4592a793.pth"
+    device: "cuda"
+    score_thre: 0.3
 - draw.bbox:
     show_labels: True
 # - draw.instance_mask

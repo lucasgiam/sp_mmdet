@@ -132,6 +132,7 @@ class Node(AbstractNode, ThresholdCheckerMixin):
         print(masks)
         print(masks.dtype)
         print(type(masks))
+        print(masks.shape)
         
         if self.effect is None:
             output_img = self._draw_standard_masks(
