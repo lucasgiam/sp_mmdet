@@ -1,5 +1,6 @@
 from typing import Any, Dict
 import numpy as np
+import torch
 
 from peekingduck.pipeline.nodes.node import AbstractNode
 
@@ -30,7 +31,7 @@ class Node(AbstractNode):
                 for v_bbox, v_mask in zip(pred_bbox, pred_mask):
                     xyxy = v_bbox[0:4].astype("float32")
                     score = v_bbox[4].astype("float32")
-                    mask = (v_mask * 1).astype("uint8")
+                    mask = v_mask.astype("uint8")
                     if score >= self.score_thre:
                         class_ids = np.append(class_ids, str(id))
                         bboxes = np.append(bboxes, [xyxy], axis=0)

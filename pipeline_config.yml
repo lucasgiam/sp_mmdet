@@ -1,14 +1,15 @@
 nodes:
 - input.visual:
-    source: "./demo/demo.jpg"
+    source: 1
+    # source: "./demo/demo.mp4"
 # - custom_nodes.model.instance_segmentation:
-#     config_file: "./mask_rcnn_r50_fpn_fp16_1x_coco.py"
-#     checkpoint_file: "./mask_rcnn_r50_fpn_fp16_1x_coco_20200205-59faf7e4.pth"
+#     config_file: "./configs/mask_rcnn/mask_rcnn_r50_fpn_fp16_1x_coco.py"
+#     checkpoint_file: "./weights/pretrained/mask_rcnn_r50_fpn_fp16_1x_coco_20200205-59faf7e4.pth"
 #     device: "cuda"
 #     score_thre: 0.3
 - custom_nodes.model.object_detection:
-    config_file: "./yolox_s_8x8_300e_coco.py"
-    checkpoint_file: "./yolox_s_8x8_300e_coco_20211121_095711-4592a793.pth"
+    config_file: "./configs/yolox/yolox_l_8x8_300e_coco.py"
+    checkpoint_file: "./weights/pretrained/yolox_l_8x8_300e_coco_20211126_140236-d3bd2b23.pth"
     device: "cuda"
     score_thre: 0.3
 - draw.bbox:
