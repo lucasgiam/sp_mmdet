@@ -124,4 +124,6 @@ work_dirs/
 *.sh~
 
 # Additional files/fodlers to ignore
-datasets/
+data/
+custom_weights/
+pretrained_weights/
