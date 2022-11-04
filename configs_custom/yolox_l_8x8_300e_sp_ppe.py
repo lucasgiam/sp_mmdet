@@ -54,6 +54,20 @@ train_pipeline = [
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
 ]
 
+train_dataset = dict(
+    type='MultiImageMixDataset',
+    dataset=dict(
+        type=dataset_type,
+        ann_file=data_root + 'train/train.json',
+        img_prefix=data_root + 'train/images/',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations', with_bbox=True)
+        ],
+        filter_empty_gt=False,
+    ),
+    pipeline=train_pipeline)
+
 test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
@@ -76,23 +90,18 @@ data = dict(
     samples_per_gpu=8,
     workers_per_gpu=4,
     persistent_workers=True,
-    train=dict(
-        type=dataset_type,
-        classes=classes,
-        ann_file=data_root + 'train/train.json',
-        img_prefix=data_root + 'train/',
-        pipeline=train_pipeline),
+    train=train_dataset,
     val=dict(
         type=dataset_type,
         classes=classes,
         ann_file=data_root + 'val/val.json',
-        img_prefix=data_root + 'val/',
+        img_prefix=data_root + 'val/images/',
         pipeline=test_pipeline),
     test=dict(
         type=dataset_type,
         classes=classes,
         ann_file=data_root + 'test/test.json',
-        img_prefix=data_root + 'test/',
+        img_prefix=data_root + 'test/images/',
         pipeline=test_pipeline))
 
 # optimizer

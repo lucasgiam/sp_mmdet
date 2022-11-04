@@ -1,13 +1,12 @@
-import sys
 import os
 import json
 import xml.etree.ElementTree as ET
 
 
 # User configs:
-xml_list = r"C:\Users\Lucas_Giam\Desktop\sp_ppe_dataset\xml_list.txt"
-xml_dir = r"C:\Users\Lucas_Giam\Desktop\sp_ppe_dataset\xml"
-json_file = r"C:\Users\Lucas_Giam\Desktop\sp_ppe_dataset\ann.json"
+xml_list = "./data/sp_ppe/xml_list.txt"
+xml_dir = "./data/sp_ppe/xml"
+json_file = "./data/sp_ppe/ann.json"
 START_BOUNDING_BOX_ID = 1
 PRE_DEFINE_CATEGORIES = {
         "no_ppe": 0,
