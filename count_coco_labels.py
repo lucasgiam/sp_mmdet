@@ -3,7 +3,7 @@ import json
 from collections import Counter
 
 
-ann_file = r"C:\Users\Lucas_Giam\sp_mmdet\mmdetection\data\sp_ppe\train\train.json"
+ann_file = "./data/sp_ppe/train/train.json"
 
 
 def cat_count(annotations=None):

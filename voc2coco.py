@@ -50,7 +50,6 @@ def convert(xml_list, xml_dir, json_file):
                  "categories": []}
     categories = PRE_DEFINE_CATEGORIES
     bnd_id = START_BOUNDING_BOX_ID
-    image_id = 0
     for line in list_fp:
         line = line.strip()
         print("Processing %s"%(line))
@@ -58,16 +57,14 @@ def convert(xml_list, xml_dir, json_file):
         tree = ET.parse(xml_f)
         root = tree.getroot()
         path = get(root, 'path')
-        filename = os.path.splitext(line)[0] + ".jpg"
-        # if len(path) == 1:
-        #     filename = os.path.basename(path[0].text)
-        # elif len(path) == 0:
-        #     filename = get_and_check(root, 'filename', 1).text
-        # else:
-        #     raise NotImplementedError('%d paths found in %s'%(len(path), line))
+        if len(path) == 1:
+            filename = os.path.basename(path[0].text)
+        elif len(path) == 0:
+            filename = get_and_check(root, 'filename', 1).text
+        else:
+            raise NotImplementedError('%d paths found in %s'%(len(path), line))
         ## The filename must be a number
-        # image_id = get_filename_as_int(filename)
-        image_id += 1
+        image_id = get_filename_as_int(filename)
         size = get_and_check(root, 'size', 1)
         width = int(get_and_check(size, 'width', 1).text)
         height = int(get_and_check(size, 'height', 1).text)

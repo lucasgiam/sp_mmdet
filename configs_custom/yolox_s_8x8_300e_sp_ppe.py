@@ -88,7 +88,7 @@ test_pipeline = [
 
 data = dict(
     samples_per_gpu=1,
-    workers_per_gpu=4,
+    workers_per_gpu=1,
     persistent_workers=True,
     train=train_dataset,
     val=dict(
@@ -115,11 +115,11 @@ optimizer = dict(
     paramwise_cfg=dict(norm_decay_mult=0., bias_decay_mult=0.))
 optimizer_config = dict(grad_clip=None)
 
-max_epochs = 50
+max_epochs = 10
 num_last_epochs = 5
 resume_from = None
 load_from = 'weights_pretrained/yolox_s_8x8_300e_coco_20211121_095711-4592a793.pth'
-interval = 10
+interval = 1
 
 # learning policy
 lr_config = dict(

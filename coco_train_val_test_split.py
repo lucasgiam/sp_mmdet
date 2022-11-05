@@ -15,7 +15,7 @@ train_ratio = 0.7
 val_ratio = 0.2
 test_ratio = 0.1
 data_root_dir = "./data/sp_ppe"
-ann_file_path = "./data/sp_ppe/ann.json"
+ann_file_path = "./data/sp_ppe/all_annotations.json"
 image_path = "./data/sp_ppe/raw_img"
 
 
@@ -59,13 +59,13 @@ def main():
             fname = train_image['file_name']
             shutil.copyfile(os.path.join(image_path, fname), os.path.join(train_image_path, fname))
         print(f'Completed {len(x)} train images')
-        for val_image in y:
-            fname = val_image['file_name']
-            shutil.copyfile(os.path.join(image_path, fname), os.path.join(val_image_path, fname))
-        print(f'Completed {len(y)} test images')
-        for test_image in z:
+        for test_image in y:
             fname = test_image['file_name']
             shutil.copyfile(os.path.join(image_path, fname), os.path.join(test_image_path, fname))
+        print(f'Completed {len(y)} test images')
+        for val_image in z:
+            fname = val_image['file_name']
+            shutil.copyfile(os.path.join(image_path, fname), os.path.join(val_image_path, fname))
         print(f'Completed {len(z)} val images')
 
         save_coco(os.path.join(train_path, "train.json"), x, filter_annotations(annotations, x), categories)
