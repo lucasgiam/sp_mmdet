@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 xml_list = "./data/sp_ppe/xml_list.txt"
 xml_dir = "./data/sp_ppe/xml"
 json_file = "./data/sp_ppe/ann.json"
+img_ext = ".jpg"
 START_BOUNDING_BOX_ID = 1
 PRE_DEFINE_CATEGORIES = {
         "no_ppe": 0,
@@ -35,36 +36,21 @@ def get_and_check(root, name, length):
         vars = vars[0]
     return vars
 
-
-def get_filename_as_int(filename):
-    try:
-        filename = os.path.splitext(filename)[0]
-        return int(filename)
-    except:
-        raise NotImplementedError('Filename %s is supposed to be an integer.'%(filename))
-
-
 def convert(xml_list, xml_dir, json_file):
     list_fp = open(xml_list, 'r')
     json_dict = {"images":[], "type": "instances", "annotations": [],
                  "categories": []}
     categories = PRE_DEFINE_CATEGORIES
     bnd_id = START_BOUNDING_BOX_ID
+    image_id = 0
     for line in list_fp:
         line = line.strip()
         print("Processing %s"%(line))
         xml_f = os.path.join(xml_dir, line)
         tree = ET.parse(xml_f)
         root = tree.getroot()
-        path = get(root, 'path')
-        if len(path) == 1:
-            filename = os.path.basename(path[0].text)
-        elif len(path) == 0:
-            filename = get_and_check(root, 'filename', 1).text
-        else:
-            raise NotImplementedError('%d paths found in %s'%(len(path), line))
-        ## The filename must be a number
-        image_id = get_filename_as_int(filename)
+        filename = os.path.splitext(line)[0] + img_ext
+        image_id += 1
         size = get_and_check(root, 'size', 1)
         width = int(get_and_check(size, 'width', 1).text)
         height = int(get_and_check(size, 'height', 1).text)
@@ -104,7 +90,6 @@ def convert(xml_list, xml_dir, json_file):
     json_fp.write(json_str)
     json_fp.close()
     list_fp.close()
-
 
 if __name__ == '__main__':
     convert(xml_list, xml_dir, json_file)
