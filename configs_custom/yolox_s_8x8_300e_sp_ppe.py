@@ -23,7 +23,7 @@ model = dict(
 
 # dataset settings
 data_root = 'data/sp_ppe/'
-dataset_type = 'CocoDataset'
+dataset_type = 'SPPPECocoDataset'
 classes = ("no_ppe", "all_ppe", "helmet", "mask", "vest", "mask_vest", "helmet_mask", "helmet_vest")
 
 train_pipeline = [
