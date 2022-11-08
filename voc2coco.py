@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 # User configs:
 xml_list = "./data/sp_ppe/xml_list.txt"
 xml_dir = "./data/sp_ppe/xml"
-json_file = "./data/sp_ppe/ann.json"
+json_file = "./data/sp_ppe/all_ann.json"
 img_ext = ".jpg"
 START_BOUNDING_BOX_ID = 1
 PRE_DEFINE_CATEGORIES = {

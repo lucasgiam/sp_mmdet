@@ -15,7 +15,7 @@ train_ratio = 0.7
 val_ratio = 0.2
 test_ratio = 0.1
 data_root_dir = "./data/sp_ppe"
-ann_file_path = "./data/sp_ppe/all_annotations.json"
+ann_file_path = "./data/sp_ppe/all_ann.json"
 image_path = "./data/sp_ppe/raw_img"
 
 

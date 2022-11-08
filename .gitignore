@@ -125,7 +125,7 @@ work_dirs/
 
 # Additional files/fodlers to ignore
 data/
-custom_weights/
-pretrained_weights/
 weights_custom/
 weights_pretrained/
+pkd_outputs/
+work_dirs/
