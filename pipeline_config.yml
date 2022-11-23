@@ -7,15 +7,20 @@ nodes:
 #     checkpoint_file: "./weights_pretrained/mask_rcnn_r50_fpn_fp16_1x_coco_20200205-59faf7e4.pth"
 #     device: "cuda"
 #     score_thre: 0.3
-- custom_nodes.model.object_detection:
-    config_file: "./configs/yolox/yolox_l_8x8_300e_coco.py"
-    checkpoint_file: "./weights_pretrained/yolox_l_8x8_300e_coco_20211126_140236-d3bd2b23.pth"
+# - custom_nodes.model.object_detection:
+#     config_file: "./configs/yolox/yolox_l_8x8_300e_coco.py"
+#     checkpoint_file: "./weights_pretrained/yolox_l_8x8_300e_coco_20211126_140236-d3bd2b23.pth"
+#     device: "cuda"
+#     score_thre: 0.3
+- custom_nodes.model.sp_ppe:
+    config_file: "./configs_custom/yolox_l_8x8_50e_sp_ppe.py"
+    checkpoint_file: "./work_dirs/yolox_l_8x8_50e_sp_ppe/best_bbox_mAP_epoch_48.pth"
     device: "cuda"
-    score_thre: 0.3
-- draw.bbox:
-    show_labels: True
+    score_thre: 0.5
+- custom_nodes.draw.sp_ppe_bbox_cond_color
+- custom_nodes.draw.sp_ppe_score_cond_color
 # - draw.instance_mask
-- custom_nodes.draw.score
+# - custom_nodes.draw.score
 - output.screen
-- output.media_writer:
-    output_dir: "./pkd_outputs"
+# - output.media_writer:
+#     output_dir: "./pkd_outputs"

@@ -1,6 +1,6 @@
 _base_ = ['../configs/_base_/schedules/schedule_1x.py', '../configs/_base_/default_runtime.py']
 
-img_scale = (416, 416)  # height, width
+img_scale = (640, 640)  # height, width
 
 # model settings
 model = dict(
@@ -8,14 +8,14 @@ model = dict(
     input_size=img_scale,
     random_size_range=(15, 25),
     random_size_interval=10,
-    backbone=dict(type='CSPDarknet', deepen_factor=0.33, widen_factor=0.50),
+    backbone=dict(type='CSPDarknet', deepen_factor=1.0, widen_factor=1.0),
     neck=dict(
         type='YOLOXPAFPN',
-        in_channels=[128, 256, 512],
-        out_channels=128,
-        num_csp_blocks=1),
+        in_channels=[256, 512, 1024],
+        out_channels=256,
+        num_csp_blocks=3),
     bbox_head=dict(
-        type='YOLOXHead', num_classes=8, in_channels=128, feat_channels=128),
+        type='YOLOXHead', num_classes=8, in_channels=256, feat_channels=256),
     train_cfg=dict(assigner=dict(type='SimOTAAssigner', center_radius=2.5)),
     # In order to align the source code, the threshold of the val phase is
     # 0.01, and the threshold of the test phase is 0.001.
@@ -87,7 +87,7 @@ test_pipeline = [
 ]
 
 data = dict(
-    samples_per_gpu=1,
+    samples_per_gpu=16,
     workers_per_gpu=1,
     persistent_workers=True,
     train=train_dataset,
@@ -108,17 +108,17 @@ data = dict(
 # default 8 gpu
 optimizer = dict(
     type='SGD',
-    lr=0.001 / 8,  # divide by num_gpu
+    lr=0.001 / 1,  # divide by num_gpu
     momentum=0.9,
     weight_decay=0.001,
     nesterov=True,
     paramwise_cfg=dict(norm_decay_mult=0., bias_decay_mult=0.))
 optimizer_config = dict(grad_clip=None)
 
-max_epochs = 10
+max_epochs = 50
 num_last_epochs = 5
 resume_from = None
-load_from = 'weights_pretrained/yolox_s_8x8_300e_coco_20211121_095711-4592a793.pth'
+load_from = 'weights_pretrained/yolox_l_8x8_300e_coco_20211126_140236-d3bd2b23.pth'
 interval = 1
 
 # learning policy
@@ -161,7 +161,7 @@ evaluation = dict(
     interval=interval,
     dynamic_intervals=[(max_epochs - num_last_epochs, 1)],
     metric='bbox')
-log_config = dict(interval=50)
+log_config = dict(interval=1)   # number of iterations for every log
 
 # NOTE: `auto_scale_lr` is for automatically scaling LR,
 # USER SHOULD NOT CHANGE ITS VALUES.
